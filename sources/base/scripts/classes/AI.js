@@ -17,8 +17,6 @@ class AI {
     }
 
     stateHandler() {
-        console.log(`AI stateHandler`);
-
         if (this.game.state.code === Game.STATES.AWAITING_PLAYER_MOVE) {
             if (this.game.state.player === this.player.id) {
                 console.log(`AI Пора атаковать`);
@@ -40,8 +38,40 @@ class AI {
         // Если есть хотябы один подбитый корабль
         if (stats.damaged.length > 0) {
             const ship = rand(stats.damaged);
+
             console.warn(ship);
-            target = rand(ship.alive);
+
+            if (ship.discovered.length > 1) {
+                if (ship.discovered[0][0] === ship.discovered[1][0]) {
+                    // Горизонтальная ориентация карабля
+
+                } else {
+                    // Вертикальная ориентация карабля
+
+                }
+
+                target = rand(ship.alive);
+
+            } else {
+                const discovered = ship.discovered[0];
+
+                const adjacent_cells =
+                    field.getAdjacentCells(...discovered);
+
+                const options = adjacent_cells
+                    .filter(cell => !cell.discovered)
+                    .filter(cell => !(
+                        cell.x !== discovered[0] &&
+                        cell.y !== discovered[1]
+                    ))
+                    .map(cell => [cell.x, cell.y]);
+
+                if (options.length)
+                    target = rand(options);
+                else
+                    target = rand(ship.alive);
+            }
+
         } else {
             const cell = rand(covered);
             target = [cell.x, cell.y];

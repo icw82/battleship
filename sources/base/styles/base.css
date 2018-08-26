@@ -258,7 +258,9 @@ textarea{resize: vertical; outline: none}
     background-color: rgb(175, 48, 72);
 }
 
-/*.game__field.enemy .game__cell.ship{ background-color: chartreuse; }*/
+.game__field.enemy .game__cell.ship{
+/*    background-color: chartreuse;*/
+}
 .game__field.enemy .game__cell.discovered{ background-color: white; }
 .game__field.enemy .game__cell.ship.discovered{
     background-color: rgb(77, 34, 160);

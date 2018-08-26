@@ -139,7 +139,7 @@ class Actions {
     end_game(mute) {
         DEBUG && console.log(`Завершить игру`);
 
-        app.players.current.game = null;
+        app.players.current.current_game = null;
 
         app.games.current = null;
 
