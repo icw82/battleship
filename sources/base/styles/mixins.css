@@ -1,0 +1,273 @@
+/* Якоря */
+@define-mixin anchor $elem, $var: anchor{
+    $(elem) {
+        border-bottom: 1px solid var(--c-$(var)--underline);
+        color: var(--c-$(var));
+        cursor: pointer;
+        @mixin-content;
+    }
+    $(elem):hover,
+    $(elem).hover{
+        border-bottom-color: var(--c-$(var)--underline--hover);
+        color: var(--c-$(var)--hover);
+    }
+}
+
+@define-mixin anchor-em $elem, $var: anchor{
+    $(elem){
+        color: var(--c-$(var));
+        cursor: pointer;
+        @mixin-content;
+    }
+    $(elem):hover,
+    $(elem).hover{
+        color: var(--c-$(var)--hover);
+    }
+    $(elem) em{
+        border-bottom: 1px solid var(--c-$(var)--underline);
+    }
+    $(elem):hover em,
+    $(elem).hover em{
+        border-bottom-color: var(--c-$(var)--underline--hover);
+    }
+}
+
+/* Заголовки */
+@define-mixin header-base $elem {
+    $(elem){
+        display: block; margin-bottom: .1em;
+        @mixin-content;
+    }
+    $(elem):not(:first-child){margin-top: 1.2em}
+}
+
+@define-mixin header $elem {
+    @mixin header-base $elem{
+        font-size: 60px; line-height: 1.3;
+        @mixin-content;
+    }
+}
+
+@define-mixin header-1 $elem {
+    @mixin header-base $elem{
+        font-size: 36px;
+        @mixin-content;
+    }
+}
+
+@define-mixin header-2 $elem {
+    @mixin header-base $elem{
+        font-size: 26px;
+        @mixin-content;
+    }
+}
+
+@define-mixin header-3 $elem {
+    @mixin header-base $elem{
+        font-weight: bold;
+        @mixin-content;
+    }
+}
+
+/* Абзац */
+@define-mixin paragraph $elem {
+    $(elem){
+        max-width: 45em; margin-bottom: 1em; font-size: var(--base-font-size);
+        @mixin-content;
+    }
+    $(elem) + ul,
+    $(elem) + ol{margin-top: -.7em}
+}
+
+/* Списки */
+@define-mixin unordered-list $elem {
+    $(elem){
+        margin: 0 0 .7em 2em; list-style-position: outside;
+        font-size: var(--base-font-size);
+        @mixin-content;
+    }
+    $(elem) > li{
+        position: relative; margin-bottom: .3em;
+        @mixin-content;
+    }
+    $(elem) > li:before{
+        position: absolute; right: 100%; top: 0;
+        content: '— '; color: var(--color-1);
+        @mixin-content;
+    }
+}
+
+@define-mixin ordered-list $elem {
+    $(elem){
+        margin: 0 0 .7em 2em; list-style-position: outside;
+        @mixin-content;
+    }
+    $(elem) > li{
+        position: relative; margin-bottom: .3em;
+        @mixin-content;
+    }
+    $(elem) > li:before{
+        position: absolute; right: 100%; top: 0;
+        content: "— "; color: var(--color-1);
+        @mixin-content;
+    }
+}
+
+/*
+
+.*** ol{counter-reset: i}
+.*** ol > li:before{position: absolute; right: 100%; top: 0;
+    display: inline-block; width: 2.5em;
+    text-align: right; counter-increment: i; content: counter(i) '. '}
+.*** ol > li > ol{margin-left: 2.2em; counter-reset: i2}
+.*** ol > li > ol > li:before{width: 3em; margin-left: -3.5em; counter-increment: i2;
+    content: counter(i) '.' counter(i2) '. '}
+*/
+
+
+/* Цитата */
+@define-mixin blockquote $elem {
+    $(elem){
+        margin-bottom: 1.7em; padding-left: 2em;
+        @mixin-content;
+    }
+}
+
+
+/* Основное */
+/*
+.common-article em,
+.common-article i{font-style: italic}
+
+.common-article strong,
+.common-article b{font-weight: bold}
+
+.common-article del,
+.common-article s{text-decoration: line-through}
+
+.common-article pre,
+.common-article code{font-family: 'PT Mono', monospace; font-size: .8em}
+*/
+
+
+
+/* Медиа-вставки */
+
+
+/* Таблицы */
+
+
+/*
+.common-article > header > .common-article__meta{margin-bottom: 20px}
+
+@mixin meta .common-article__meta{}
+@mixin colored-links .common-article__content>p{}
+
+.common-article__annotation > p{
+    margin-bottom: 1.7em; font-style: italic; color: var(--c-gray)}
+
+@define-mixin article-images $elem{
+    $(elem) img {display: block; max-width: 100%; margin-top: 1em}
+    $(elem) figure{margin-bottom: 1em}
+    $(elem) figure > img{margin-bottom: .5em}
+    $(elem) figcaption{margin-bottom: 1em; font-style: italic; color: var(--c-gray)}
+    $(elem) figcaption > p{margin-bottom: .4em}
+}
+
+.common-article__cover{margin-bottom: 2em}
+
+@mixin article-images .common-article__cover{}
+@mixin article-images .common-article__content{}
+
+
+.common-article__content p,
+.common-article__meta p{margin-bottom: 1em}
+.common-article__content p.note{font-size: 14px; font-style: italic}
+
+
+.common-article__table{margin-bottom: 1.2em}
+.common-article__table > caption{margin-bottom: .166em; font-style: italic}
+
+.common-article__table tr{}
+.common-article__table th,
+.common-article__table td{position: relative; padding: .28em 1.67em .28em 0}
+.common-article__table th{font-weight: bold}
+
+.common-article__table > thead{font-size: .89em; font-weight: bold}
+.common-article__table > thead > tr{border-bottom: 1px solid var(--c-text)}
+.common-article__table > tfoot > tr{border-top: 1px solid  var(--c-text)}
+.common-article__table > thead > tr > td{padding: 0 1.875em .25em 0}
+
+.common-article__table > thead.center td,
+.common-article__table > tbody.center td,
+.common-article__table > tfoot.center td{text-align: center}
+.common-article__table > thead.right td,
+.common-article__table > tbody.right td,
+.common-article__table > tfoot.right td{text-align: right}
+
+.common-article__table.stripy > tbody > tr.odd,
+.common-article__table.stripy > tbody > tr:nth-child(odd){background-color: rgba(0, 0, 0, .04)}
+
+.common-article__table.stripy > tbody > tr.odd > td:first-child:before,
+.common-article__table.stripy > tbody > tr.odd > th:first-child:before,
+.common-article__table.stripy > tbody > tr:nth-child(odd) > td:first-child:before,
+.common-article__table.stripy > tbody > tr:nth-child(odd) > th:first-child:before{
+    display: block; width: .67em; height: 100%; position: absolute; left: -.67em; top: 0;
+    background-color: rgba(0, 0, 0, .04); content: ""}
+
+.common-article__wide-table{position: relative; margin-bottom: 1.2em; padding: 20px;
+    background-color: rgb(245, 241, 219)}
+.common-article__wide-table__wrapper{max-width: 100%;
+    overflow: hidden; margin-right: auto}
+.common-article__wide-table .common-article__table{overflow: visible}
+
+.common-article__wide-table th{position: absolute; left: 20px; z-index: 1;
+    padding-left: 0; padding-right: 10px; white-space: nowrap;
+    -moz-box-sizing: border-box; box-sizing: border-box}
+
+.common-article__wide-table__wrapper:before,
+.common-article__wide-table__lining:before{display: block; width: 35px; height: 100%;
+    position: absolute; top: 0; content: ""; z-index: 4; opacity: 0;
+    transition: opacity var(--anim-out__time) ease}
+.common-article__wide-table__wrapper:before{right: 20px; top: 0;
+    background-image: linear-gradient(90deg, rgba(245, 241, 219, 0), rgb(245, 241, 219))}
+.common-article__wide-table__lining:before{left: 100%; top: 0;
+    background-image: linear-gradient(-90deg, rgba(245, 241, 219, 0), rgb(245, 241, 219))}
+
+.common-article__wide-table__wrapper.right:before,
+.left > .common-article__wide-table__lining:before{opacity: 1}
+
+
+.common-article__wide-table__lining{height: 100%; position: absolute; left: 20px; top: 0;
+    background-color: rgb(245, 241, 219); z-index: 0}
+.common-article__wide-table__scroll-bar{width: auto; height: 0; position: relative; z-index: 5;
+    margin-bottom: 30px;
+    border-top: 1px solid rgb(207, 152, 109); border-bottom: 1px solid rgb(239, 175, 126)}
+.common-article__wide-table__scroll-bar__thumb{width: 0; height: 37px}
+.common-article__wide-table__scroll-bar__thumb:after{width: 26px; height: 37px; position: absolute;
+    left: -13px; top: 0; content: ""}
+
+.common-article__content dl.faq{margin-bottom: 1.2em}
+.common-article__content dl.faq > dt,
+.common-article__content dl.faq > dd{position: relative; margin-left: 2em}
+.common-article__content dl.faq > dt:before,
+.common-article__content dl.faq > dd:before{position: absolute; right: 100%; top: 0; content: "— "}
+.common-article__content dl.faq > dd + dd:before{display: none}
+.common-article__content dl.faq > dt{font-weight: bold}
+.common-article__content dl.faq > dd{margin-bottom: .6em}
+
+.common-article__content dl.faq-for-block{margin-bottom: 1.2em}
+.common-article__content dl.faq-for-block > dt,
+.common-article__content dl.faq-for-block > dd{}
+.common-article__content dl.faq-for-block > dt:before,
+.common-article__content dl.faq-for-block > dd:before{content: "— "}
+.common-article__content dl.faq-for-block > dd + dd:before{display: none}
+.common-article__content dl.faq-for-block > dt{font-weight: bold}
+.common-article__content dl.faq-for-block > dd{margin-bottom: .6em}
+
+*/
+
+/*
+textarea.def{width: 80%; height: 300px;
+    font-family: PT Mono, monospace; font-size: 12px}
+*/

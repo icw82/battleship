@@ -1,0 +1,82 @@
+/*
+1vw = 1% of viewport width
+1vh = 1% of viewport height
+1vmin = 1vw or 1vh, whichever is smaller
+1vmax = 1vw or 1vh, whichever is larger
+*/
+
+:root {
+    --block-vertical-gap: 32px;
+    --grid-column-gap: 26px;
+    --grid-row-gap: 0;
+    --grid-width: 100%;
+
+    /* B O R D E R S */
+    --block-radius: 5px;
+    --small-radius: 3px;
+
+
+    /* F O N T S */
+    --base-font: sans-serif;
+    --base-font-size: 22px;
+
+    /* F O R M S */
+    --f-item-padding-top: .2em;
+    --f-item-padding-left: .4em;
+    --f-item-padding: var(--f-item-padding-top) var(--f-item-padding-left);
+
+
+    /* M A R G I N S   A N D   P A D D I N G S */
+
+    /* C O L O R S */
+    --color-1: rgb(55, 129, 193);
+    --color-2: rgb(175, 81, 110);
+    --color-3: rgb(108, 44, 145);
+
+    --c-text: rgba(0, 0, 0, .8);
+    --c-text--time: rgba(0, 0, 0, .6);
+
+    --c-anchor: rgb(20, 123, 240);
+    --c-anchor--underline: rgba(20, 123, 240, .4);
+    --c-anchor--hover: rgb(0, 134, 255);
+    --c-anchor--underline--hover: rgba(0, 134, 255, .4);
+
+    --c-anchor-danger: rgb(216, 80, 58);
+    --c-anchor-danger--underline: rgba(216, 80, 58, .4);
+    --c-anchor-danger--hover: rgb(190, 70, 50);
+    --c-anchor-danger--underline--hover: rgba(190, 70, 50, .4);
+
+    --c-anchor-white: rgba(255, 255, 255, 1);
+    --c-anchor-white--underline: rgba(255, 255, 255, .4);
+    --c-anchor-white--hover: rgba(255, 255, 255, 1);
+    --c-anchor-white--underline--hover: rgba(255, 255, 255, .7);
+
+    --c-anchor-base: var(--c-text);
+    --c-anchor-base--underline: rgba(0, 0, 0, .3);
+    --c-anchor-base--hover: var(--c-anchor--hover);
+    --c-anchor-base--underline--hover: var(--c-anchor--underline--hover);
+
+    --c-button: var(--c-anchor);
+    --c-button--hover: var(--c-anchor--hover);
+
+
+    /* B A C K G R O U N D S */
+    --bg-light: rgb(255, 255, 255);
+    --bg-lining: rgb(233, 237, 241);
+    --bg-dark: rgb(17, 33, 50);
+    --gradient: linear-gradient(
+        90deg,
+        var(--color-1) 10%,
+        var(--color-2) 90%
+    );
+    --gradient-light: linear-gradient(
+        90deg,
+        var(--color-1),
+        var(--color-2)
+    );
+
+    /* A N I M A T I O N S */
+    --anim-function: cubic-bezier(0.19, 1, 0.22, 1);
+    --anim-out__time: 20ms;
+    --anim-in__time: 20ms;
+}

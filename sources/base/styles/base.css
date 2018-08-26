@@ -1,0 +1,265 @@
+/**
+ *    Базовые стили
+ */
+body {
+    width: 100%; height: 100%;
+    overflow-y: scroll;
+
+    background-color: var(--bg-dark);
+
+    font-family: var(--base-font);
+    font-size: var(--base-font-size);
+    line-height: 1.5;
+
+    color: var(--c-text);
+}
+
+a,
+a > em{
+    text-decoration: none;
+    transition: all var(--anim-out__time) var(--anim-function);
+/*    transition-property: color, border-bottom-color, background-color;*/
+}
+/*
+a:hover,
+a:hover > em{
+    transition: all var(--anim-in__time) var(--anim-function);
+    transition-property: color, border-bottom-color, background-color;
+}
+*/
+a.pressed{opacity:.6;
+    transition:
+        opacity .1s var(--anim-function),
+        color .1s var(--anim-function)
+}
+a > svg,
+svg{transition: fill var(--anim-out__time) var(--anim-function)}
+.hover > svg,
+:hover > svg,
+svg.hover,
+svg:hover{transition: fill var(--anim-in__time) var(--anim-function)}
+
+textarea{resize: vertical; outline: none}
+.nobr{white-space: nowrap}
+
+
+/**
+ *  Разметка страницы
+ */
+.viewport{
+    width: 600px;
+    padding: 25px;
+    min-height: 1px;
+    margin: 20px auto 0 auto;
+    border-radius: var(--block-radius);
+    background-color: rgba(215, 240, 255, 0.85);
+    box-shadow: 0 16px 75px rgba(0, 0, 0, 1);
+}
+
+.viewport__navigation{
+    position: relative;
+    margin: -25px -25px 0 -25px;
+    border-bottom: 1px solid rgba(255, 255, 255, .5);
+    border-radius: var(--block-radius) var(--block-radius) 0 0;
+    background-color: rgba(0, 0, 0, .1);
+}
+
+.viewport__navigation__player{
+    display: inline-block;
+    position: absolute; top: 0; right: 0;
+    padding: .2em .8em;
+    opacity: 0;
+    font-size: inherit; font-weight: normal; color: white;
+}
+
+.viewport__navigation__player.show{
+    opacity: 1;
+}
+
+.viewport__header{text-align: center; font-size: 58px; font-weight: bold}
+
+.viewport__header-2{
+    margin-bottom: .4em;
+    font-size: 130%;
+}
+
+.f-button{
+    display: inline-block; padding: .2em .8em;
+    background-color: var(--c-anchor); border: none;
+    border-radius: var(--small-radius);
+    font-size: inherit; font-weight: normal; color: white;
+}
+.f-button:hover:not(:disabled){
+    background-color: var(--c-anchor--hover)
+}
+.f-button:disabled{opacity: .7}
+
+.f-button.danger {
+    background-color: rgba(0, 0, 0, .35);
+}
+.f-button.danger:hover:not(:disabled){
+    background-color: rgb(255, 50, 50);
+}
+.f-button.danger:disabled{opacity: 0; cursor: default}
+
+.f-button.transparent {
+    background-color: transparent;
+    color: inherit;
+}
+.f-button.transparent:hover:not(:disabled){
+    background-color: rgba(255, 255, 255, .2);
+}
+.f-button.transparent:disabled{opacity: 0; cursor: default}
+
+[screen]{display: none}
+[screen].show{display: block}
+
+.menu{text-align: center}
+.menu__items{}
+.menu__item{
+    margin-bottom: .5em;
+}
+.menu__item > button{
+}
+
+.new_player{text-align: center}
+.new_player_form{}
+.new_player_form label{
+    display: block; margin-bottom: .3em;
+}
+.new_player_form input{
+    display: block; margin: 0 auto .8em auto;
+    text-align: center;
+}
+.new_player_form button{}
+
+.choosing_player{text-align: center}
+
+.choosing_player__list{}
+.choosing_player__list > li{
+    max-width: 18em;
+    margin: 0 auto .5em auto;
+}
+.choosing_player__list .f-button{
+    width: 100%; position: relative;
+    padding-right: 3em;
+    text-align: left;
+}
+.choosing_player__list .f-button:after{
+    position: absolute;
+    right: .8em; top: .2em;
+    content: attr(win-rate);
+}
+
+.game{
+    text-align: center;
+    margin: 20px 0 0 0;
+}
+
+.game__viewport{
+    perspective: 600px;
+}
+
+.game__turn{margin-bottom: 1em}
+
+.game__fields-container{
+    width: 500px; height: 500px;
+    position: relative;
+    margin: 0 auto 40px auto;
+    transform-style: preserve-3d;
+    transition: transform .5s ease;
+}
+
+
+.game__field{
+    display: block; width: 100%; height: 100%; line-height: 0;
+    position: absolute; left: 0; top: 0; opacity: 0; pointer-events: none;
+    border-radius: 3px;
+    box-shadow: 0 16px 75px rgba(0, 0, 0, .3);
+    background-color: white;
+    transition: background .5s ease;
+}
+
+.game__fields-container.ally{
+    transform: translateZ(-100px) rotateY(0deg);
+}
+.game__field.ally{
+    background-color: white;
+    transform: translateZ(100px) rotateY(0deg);
+}
+.game__fields-container.ally .game__field.ally{
+    opacity: 1; pointer-events: auto}
+
+
+.game__fields-container.enemy{
+    transform: translateZ(-100px) rotateY(180deg);
+}
+.game__field.enemy{
+    background-color: rgb(34, 33, 39);
+    transform: translateZ(-100px) rotateY(180deg);
+}
+.game__fields-container.enemy .game__field.enemy{
+    opacity: 1; pointer-events: auto}
+
+
+.game__cell{
+    display: inline-block; width: 50px; height: 100%;
+    position: absolute;
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .2);
+    cursor: pointer;
+}
+
+.game__cell.row-start.col-start{border-top-left-radius: 3px}
+.game__cell.row-end.col-start{border-top-right-radius: 3px}
+.game__cell.row-end.col-end{border-bottom-right-radius: 3px}
+.game__cell.row-start.col-end{border-bottom-left-radius: 3px}
+
+.game__cell:after{
+    display: block; width: 100%; height: 100%;
+    position: absolute; left: 0; top: 0; content: '';
+    background-color: rgb(235, 31, 55);
+    box-shadow: 0 0 30px rgba(235, 31, 55, .5);
+    opacity: 0;
+    transition: opacity .2s ease;
+}
+
+.game__cell:hover:after{
+    opacity: 1;
+    transition: opacity .02s ease;
+}
+
+.game__cell:before{
+    display: block; width: 100%; height: 100%;
+    position: absolute; left: 0; top: 50%;
+    text-align: center;
+    content: '×'; font-size: 45px;
+    color: rgb(255, 0, 20);
+    opacity: 0;
+    user-select: none;
+    transition: color .8s ease, opacity .05s ease;
+}
+
+.game__cell.ship{}
+
+.game__cell.discovered,
+.game__field.ally .game__cell{ cursor: default; }
+.game__cell.discovered:after,
+.game__field.ally .game__cell:after{ opacity: 0; }
+
+.game__cell.discovered:before{
+    color: rgba(0, 0, 0, .1);
+    opacity: 1;
+}
+
+.game__field.ally .game__cell.ship{
+    background-color: rgb(48, 94, 175);
+}
+.game__field.ally .game__cell.ship.discovered{
+    background-color: rgb(175, 48, 72);
+}
+
+/*.game__field.enemy .game__cell.ship{ background-color: chartreuse; }*/
+.game__field.enemy .game__cell.discovered{ background-color: white; }
+.game__field.enemy .game__cell.ship.discovered{
+    background-color: rgb(77, 34, 160);
+}

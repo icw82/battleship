@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <title>Battleship: The Game</title>
+
+    <meta charset="UTF-8" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta name="robots" content="index,follow" />
+<!--    <meta name="viewport" content="width=1248">-->
+
+    <link rel="stylesheet" href="styles/third-party/kk-reset.css" />
+    <link rel="stylesheet" href="styles/main.css" />
+
+</head>
+<body>
+    <div class="viewport">
+        <nav class="viewport__navigation">
+            <button class="f-button transparent" type="button"
+                action="back"
+                disabled-if="!app.state.hasParent()">
+                ← Назад
+            </button>
+
+            <div class="viewport__navigation__player"
+                show="app.players.current"
+                bind="app.players.current.name"
+            ></div>
+        </nav>
+
+        <header class="viewport__header">Морской бой</header>
+
+        <div class="menu" screen="login">
+            <header class="viewport__header-2">
+                Здорова, морячок!
+            </header>
+            <ul class="menu__items">
+                <li class="menu__item">
+                    <button class="f-button" type="button"
+                        action="open_new_player_menu">
+                        Новый игрок
+                    </button>
+                </li>
+                <li class="menu__item">
+                    <button class="f-button" type="button"
+                        action="open_choose_player_menu"
+                        disabled-if="!app.players.hasNonAI">
+                        Выбрать игрока
+                    </button>
+                </li>
+            </ul>
+        </div>
+
+        <div class="menu" screen="main_menu">
+            <ul class="menu__items">
+                <li class="menu__item">
+                    <button class="f-button" type="button"
+                        action="create_new_game">
+                        Новая игра
+                    </button>
+                </li>
+                <li class="menu__item">
+                    <button class="f-button" type="button"
+                        action="continue_game"
+                        disabled-if="!app.players.current.current_game">
+                        Продолжить игру
+                    </button>
+                </li>
+                <li class="menu__item">
+                    <button class="f-button danger" type="button"
+                        action="delete_current_player">
+                        Удалить этого игрока
+                    </button>
+                </li>
+                <li class="menu__item">
+                    <button class="f-button" type="button"
+                        action="sign_out">
+                        Выход
+                    </button>
+                </li>
+            </ul>
+        </div>
+
+        <div class="new_player" screen="new_player">
+            <div class="new_player_form">
+                <label for="new_player_name">
+                    Имя нового игрока
+                </label>
+                <input id="new_player_name"
+                    type="text" name="name" list="name_list" />
+                <datalist id="name_list">
+                    <option value="Доктор Эмметт Браун">
+                    <option value="Джон Рональд Руэл Толкин">
+                    <option value="Дуглас Адамс">
+                    <option value="Марти Макфлай">
+                    <option value="Терри Пратчетт">
+                    <option value="Хидэо Кодзима">
+                    <option value="山田洋次">
+                </datalist>
+                <button class="f-button" type="button"
+                    action="create_new_player">
+                    Создать
+                </button>
+            </div>
+        </div>
+
+        <div class="choosing_player" screen="choosing_player">
+            <header class="viewport__header-2">Выбор игрока</header>
+            <ul class="choosing_player__list" id="player-list"></ul>
+        </div>
+
+        <div class="game" screen="game">
+            <div id="game-viewport" class="game__viewport"></div>
+        </div>
+    </div>
+
+    <!-- Скрипты исполняются после загрузки страницы -->
+    <script defer src="scripts/main.js"></script>
+
+</body>
+</html>
